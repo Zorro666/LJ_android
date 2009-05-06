@@ -5,8 +5,11 @@ import android.widget.LinearLayout;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.opengl.GLSurfaceView;
+import android.view.View;
+import android.view.View.OnTouchListener;
+import android.view.MotionEvent;
 
-public class JakesTest extends Activity {
+public class JakesTest extends Activity implements OnTouchListener {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -20,8 +23,10 @@ public class JakesTest extends Activity {
         // Create our Preview view and set it as the content of our
         // Activity
         
+        mMyRenderer = new JakeRenderer(true);
         mGLSurfaceView = new GLSurfaceView(this);
-        mGLSurfaceView.setRenderer(new JakeRenderer(true));
+        mGLSurfaceView.setRenderer(mMyRenderer);
+        mGLSurfaceView.setOnTouchListener( this );
 //        myBaseView.addView(mGLSurfaceView);
 //        setContentView( myBaseView );
         setContentView( mGLSurfaceView);
@@ -43,6 +48,11 @@ public class JakesTest extends Activity {
         mGLSurfaceView.onPause();
     }
 
+    public boolean onTouch( View v, MotionEvent event )
+    {
+    	return mMyRenderer.onTouch( v, event );
+    }
     private GLSurfaceView mGLSurfaceView;
     private LinearLayout myBaseView;
+    private JakeRenderer mMyRenderer;
 }

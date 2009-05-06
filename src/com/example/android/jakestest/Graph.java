@@ -64,12 +64,12 @@ public class Graph
         mLineBuffer.put(lineIndices);
         mLineBuffer.position(0);
 	}
-	public void SetMin( Integer min )
+	public void SetMin( int min )
 	{
 		mMin = min;
 		Resize();
 	}
-	public void SetMax( Integer max )
+	public void SetMax( int max )
 	{
 		mMax = max;
 		Resize();
@@ -79,7 +79,7 @@ public class Graph
 		gl.glPushMatrix();
         gl.glFrontFace(gl.GL_CW);
         
-		Integer size = mBars.size();
+		int size = mBars.size();
 		gl.glTranslatef( mX0, mY0, 0.0f );
 		gl.glColor4f( 1.0f, 1.0f, 1.0f, 1.0f );
 		
@@ -97,10 +97,10 @@ public class Graph
 		float scale = 1.0f / size;
 		gl.glScalef( scale, 1.0f, 1.0f );
         gl.glVertexPointer(3, gl.GL_FIXED, 0, mVertexBuffer);
-		for ( Integer i = 0; i < size; ++i )
+		for ( int i = 0; i < size; ++i )
 		{
-			Integer value = mMin + i;
-			Integer count = mBars.get( i );
+			int value = mMin + i;
+			int count = mBars.get( i );
 			float heightScale = count / 10.0f + 0.005f;
 			gl.glColor4f(1.0f, 0.6f, 0.8f, 1.0f );
 			gl.glPushMatrix();
@@ -113,16 +113,32 @@ public class Graph
 		}
 		gl.glPopMatrix();
 	}
+	public void onTouch( float x, float y )
+	{
+		int size = mBars.size();
+		int value = (int)( ( x - mX0*2.0f ) / ( size * 2.0f ) );
+		value--;
+		if ( value >= size )
+		{
+			return;
+		}
+		if ( value < 0 )
+		{
+			return;
+		}
+		int count = mBars.get( value );
+		mBars.set( value, count+1 );
+	}
 	private void Resize()
 	{
-		Integer size = mMax - mMin + 1;
+		int size = mMax - mMin + 1;
 		if ( size < 0 )
 		{
 			return;
 		}
 		mBars.clear();
 		mBars.ensureCapacity(size);
-		for ( Integer i = 0; i < size; ++i )
+		for ( int i = 0; i < size; ++i )
 		{
 			mBars.add( 0 );
 		}
@@ -130,15 +146,15 @@ public class Graph
 	}
 	private void Zero()
 	{
-		Integer size = mBars.size();
-		for ( Integer i = 0; i < size; ++i )
+		int size = mBars.size();
+		for ( int i = 0; i < size; ++i )
 		{
 			mBars.set( i, i );
 		}
 	}
 	private ArrayList<Integer>		mBars = new ArrayList<Integer>();
-	private Integer					mMin = 2;
-	private Integer					mMax = 12;
+	private int					mMin = 2;
+	private int					mMax = 12;
     private IntBuffer   mVertexBuffer;
     private IntBuffer   mHline;
     private IntBuffer   mVline;

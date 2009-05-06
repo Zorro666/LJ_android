@@ -4,6 +4,8 @@ import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 import android.opengl.GLSurfaceView;
+import android.view.View;
+import android.view.MotionEvent;
 
 class JakeRenderer implements GLSurfaceView.Renderer 
 {
@@ -98,6 +100,16 @@ class JakeRenderer implements GLSurfaceView.Renderer
          gl.glShadeModel(GL10.GL_SMOOTH);
          gl.glEnable(GL10.GL_DEPTH_TEST);
     }
+    public boolean onTouch( View v, MotionEvent event )
+    {
+    	//if ( event.getAction() == MotionEvent.ACTION_UP )
+    	{
+    		mGraph.onTouch( event.getX(), event.getY() );
+    		return true;
+    	}
+    	//return false;
+    }
+    
     private boolean mTranslucentBackground;
     private Cube mCube;
     private float mAngle;

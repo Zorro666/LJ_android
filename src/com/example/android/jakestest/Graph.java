@@ -144,12 +144,12 @@ public class Graph
 		}
 		Zero();
 	}
-	private void Zero()
+	public void Zero()
 	{
 		int size = mBars.size();
 		for ( int i = 0; i < size; ++i )
 		{
-			mBars.set( i, i );
+			mBars.set( i, 0 );
 		}
 	}
 	private ArrayList<Integer>		mBars = new ArrayList<Integer>();

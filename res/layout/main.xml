@@ -2,11 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
+    android:layout_height="fill_parent">
 <TextView  
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
     android:text="@string/hello"
     />
+<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:clickable="true" android:cursorVisible="true" android:text="Reset" android:drawingCacheQuality="high" android:id="@+id/ButtonReset"></Button>
+
+
+
+
+
+<AbsoluteLayout android:id="@+id/AbsoluteLayout01" android:layout_width="wrap_content" android:layout_height="wrap_content"></AbsoluteLayout>
 </LinearLayout>

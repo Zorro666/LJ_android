@@ -109,6 +109,10 @@ class JakeRenderer implements GLSurfaceView.Renderer
     	}
     	//return false;
     }
+    public void resetGraph()
+    {
+    	mGraph.Zero();
+    }
     
     private boolean mTranslucentBackground;
     private Cube mCube;

@@ -1,11 +1,11 @@
 package com.example.android.jakestest;
 
 import android.app.Activity;
-import android.widget.LinearLayout;
 import android.os.Bundle;
-import android.widget.TextView;
 import android.opengl.GLSurfaceView;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.view.View.OnTouchListener;
 import android.view.MotionEvent;
 
@@ -14,23 +14,18 @@ public class JakesTest extends Activity implements OnTouchListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        myBaseView = new LinearLayout( this );
-        myBaseView.setOrientation( LinearLayout.VERTICAL );
-        TextView tv = new TextView(this);
-        tv.setText("Hello, Android");
-//y        myBaseView.addView(tv);
 
-        // Create our Preview view and set it as the content of our
-        // Activity
-        
         mMyRenderer = new JakeRenderer(true);
-        mGLSurfaceView = new GLSurfaceView(this);
+        mGLSurfaceView = new GLSurfaceView( this );
         mGLSurfaceView.setRenderer(mMyRenderer);
         mGLSurfaceView.setOnTouchListener( this );
-//        myBaseView.addView(mGLSurfaceView);
-//        setContentView( myBaseView );
-        setContentView( mGLSurfaceView);
-
+        
+        setContentView( R.layout.main );
+        ViewGroup absLayout = (ViewGroup)findViewById( R.id.AbsoluteLayout01 );
+        absLayout.addView( mGLSurfaceView );
+        
+        mResetButton = (Button)findViewById( R.id.ButtonReset );
+        mResetButton.setOnTouchListener(this);
     }
     @Override
     protected void onResume() {
@@ -50,9 +45,18 @@ public class JakesTest extends Activity implements OnTouchListener {
 
     public boolean onTouch( View v, MotionEvent event )
     {
-    	return mMyRenderer.onTouch( v, event );
+    	if ( v == mResetButton )
+    	{
+    		mMyRenderer.resetGraph();
+    		return true;
+    	}
+    	else if ( v == mGLSurfaceView )
+    	{
+    		return mMyRenderer.onTouch( v, event );
+    	}
+    	return false;
     }
     private GLSurfaceView mGLSurfaceView;
-    private LinearLayout myBaseView;
     private JakeRenderer mMyRenderer;
+    private View mResetButton;
 }

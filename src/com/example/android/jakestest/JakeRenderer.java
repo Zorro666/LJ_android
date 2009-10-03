@@ -38,7 +38,7 @@ class JakeRenderer implements GLSurfaceView.Renderer
         gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
         gl.glEnableClientState(GL10.GL_COLOR_ARRAY);
 
-        mCube.draw(gl);
+        //mCube.draw(gl);
 
         gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
         gl.glDisableClientState(GL10.GL_COLOR_ARRAY);

@@ -14,7 +14,7 @@ public class JakesTest extends Activity implements OnTouchListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        
         mMyRenderer = new JakeRenderer(true);
         mGLSurfaceView = new GLSurfaceView( this );
         mGLSurfaceView.setRenderer(mMyRenderer);

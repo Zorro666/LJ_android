@@ -77,7 +77,7 @@ public class Graph
 	public void Render( GL10 gl )
 	{
 		gl.glPushMatrix();
-        gl.glFrontFace(gl.GL_CW);
+        gl.glFrontFace(GL10.GL_CW);
         
 		int size = mBars.size();
 		gl.glTranslatef( mX0, mY0, 0.0f );
@@ -85,29 +85,28 @@ public class Graph
 		
 		gl.glPushMatrix();
 		gl.glScalef( 1.5f, 1.0f, 1.0f );
-        gl.glVertexPointer(3, gl.GL_FIXED, 0, mHline);
-		gl.glDrawElements(gl.GL_LINE_STRIP, 2, gl.GL_UNSIGNED_BYTE, mLineBuffer );
+        gl.glVertexPointer(3, GL10.GL_FIXED, 0, mHline);
+		gl.glDrawElements(GL10.GL_LINE_STRIP, 2, GL10.GL_UNSIGNED_BYTE, mLineBuffer );
 		
 		gl.glScalef( 1.0f, 1.5f, 1.0f );
-        gl.glVertexPointer(3, gl.GL_FIXED, 0, mVline);
-		gl.glDrawElements(gl.GL_LINE_STRIP, 2, gl.GL_UNSIGNED_BYTE, mLineBuffer );
+        gl.glVertexPointer(3, GL10.GL_FIXED, 0, mVline);
+		gl.glDrawElements(GL10.GL_LINE_STRIP, 2, GL10.GL_UNSIGNED_BYTE, mLineBuffer );
 		
 		gl.glPopMatrix();
 		gl.glTranslatef( 0.06f, 0.06f, 0.0f );
 		float scale = 1.0f / size;
 		gl.glScalef( scale, 1.0f, 1.0f );
-        gl.glVertexPointer(3, gl.GL_FIXED, 0, mVertexBuffer);
+        gl.glVertexPointer(3, GL10.GL_FIXED, 0, mVertexBuffer);
 		for ( int i = 0; i < size; ++i )
 		{
-			int value = mMin + i;
 			int count = mBars.get( i );
 			float heightScale = count / 10.0f + 0.005f;
 			gl.glColor4f(1.0f, 0.6f, 0.8f, 1.0f );
 			gl.glPushMatrix();
 			gl.glScalef( 1.0f, heightScale, 1.0f );
-			gl.glDrawElements(gl.GL_TRIANGLE_STRIP, 4, gl.GL_UNSIGNED_BYTE, mIndexBuffer);
+			gl.glDrawElements(GL10.GL_TRIANGLE_STRIP, 4, GL10.GL_UNSIGNED_BYTE, mIndexBuffer);
 			gl.glColor4f( 1.0f, 1.0f, 1.0f, 1.0f );
-			gl.glDrawElements(gl.GL_LINE_STRIP, 5, gl.GL_UNSIGNED_BYTE, mLineBuffer );
+			gl.glDrawElements(GL10.GL_LINE_STRIP, 5, GL10.GL_UNSIGNED_BYTE, mLineBuffer );
 			gl.glPopMatrix();
 			gl.glTranslatef( 1.2f, 0.0f, 0.0f );
 		}
